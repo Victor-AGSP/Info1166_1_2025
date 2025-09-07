@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolsa de Empleo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Bolsa Nacional de Empleo</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Inicio</a></li>
+                <li><a th:href="@{/ofertas}">Buscar Empleo</a></li>
+                <li><a th:href="@{/empresas}">Empresas</a></li>
+                <li><a th:href="@{/contacto}">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Buscador -->
+        <section class="buscador">
+            <h2>¿Qué empleo buscas?</h2>
+            <form th:action="@{/buscar}" method="get">
+                <input type="text" name="query" placeholder="Profesión, empresa o palabra...">
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+
+        <!-- Resultados -->
+        <section class="resultados">
+            <h2>Ofertas de empleo</h2>
+            <div th:if="${ofertas != null}">
+                <ul>
+                    <li th:each="oferta : ${ofertas}">
+                        <strong th:text="${oferta.titulo}"></strong><br>
+                        <span th:text="${oferta.empresa}"></span> - 
+                        <span th:text="${oferta.ubicacion}"></span>
+                    </li>
+                </ul>
+            </div>
+            <div th:if="${ofertas == null}">
+                <p>No hay resultados todavía.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Bolsa Nacional de Empleo</p>
+    </footer>
+</body>
+</html>
